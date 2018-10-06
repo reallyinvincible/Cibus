@@ -1,12 +1,9 @@
 package com.example.bakingapp.activities;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,19 +15,16 @@ import com.example.bakingapp.fragments.StepDetailFragment;
 import com.example.bakingapp.models.Recipe;
 import com.google.gson.Gson;
 
-import java.util.Objects;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
 
-    Recipe recipe;
-    static StepSelectInterface mStepSelectInterface;
-    StepNavigationInterface mStepNavigationInterface;
-    int mPosition = 0;
-    boolean recipeLoaded = true;
-    static boolean twoPane = false;
+    private Recipe recipe;
+    private static StepSelectInterface mStepSelectInterface;
+    private StepNavigationInterface mStepNavigationInterface;
+    private int mPosition = 0;
+    private boolean recipeLoaded = true;
+    private static boolean twoPane = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +97,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void loadRecipes() {
+    private void loadRecipes() {
         RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
         recipeDetailFragment.setRecipe(recipe);
         recipeDetailFragment.setmStepSelectInterface(mStepSelectInterface);
@@ -115,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void loadStepsWithBackStack() {
+    private void loadStepsWithBackStack() {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
         stepDetailFragment.setRecipe(recipe);
         stepDetailFragment.setPosition(mPosition);
@@ -128,7 +122,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void loadStepsWithoutBackStack() {
+    private void loadStepsWithoutBackStack() {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
         stepDetailFragment.setRecipe(recipe);
         stepDetailFragment.setPosition(mPosition);
@@ -141,7 +135,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void setmPosition(int mPosition) {
+    private void setmPosition(int mPosition) {
         this.mPosition = mPosition;
         loadStepsWithoutBackStack();
     }

@@ -19,8 +19,8 @@ import butterknife.ButterKnife;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder> {
 
-    List<Step> stepList;
-    StepSelectInterface mStepSelectInterface;
+    private final List<Step> stepList;
+    private final StepSelectInterface mStepSelectInterface;
 
     public StepAdapter(List<Step> stepList, StepSelectInterface stepSelectInterface) {
         this.stepList = stepList;

@@ -18,7 +18,7 @@ public class Ingredient implements Parcelable{
     @Expose
     private String ingredient;
 
-    protected Ingredient(Parcel in) {
+    private Ingredient(Parcel in) {
         if (in.readByte() == 0) {
             quantity = null;
         } else {

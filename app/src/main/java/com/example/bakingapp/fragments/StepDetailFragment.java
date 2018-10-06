@@ -40,19 +40,25 @@ import butterknife.ButterKnife;
 public class StepDetailFragment extends Fragment {
 
     @BindView(R.id.tv_recipe_name)
+    private
     TextView recipeName;
     @BindView(R.id.exoplayer)
+    private
     SimpleExoPlayerView exoPlayerView;
     @BindView(R.id.tv_step_full_description)
+    private
     TextView descriptionText;
     @BindView(R.id.btn_next_step)
+    private
     Button nextStepButton;
     @BindView(R.id.btn_previous_step)
+    private
     Button previousStepButton;
     @BindView(R.id.toolbar)
+    private
     Toolbar toolbar;
 
-    SimpleExoPlayer mExoPlayer;
+    private SimpleExoPlayer mExoPlayer;
     private StepNavigationInterface mStepNavigationInterface;
     private int position = 0;
     private Recipe recipe;
@@ -93,7 +99,7 @@ public class StepDetailFragment extends Fragment {
         return view;
     }
 
-    void populateUi(){
+    private void populateUi(){
         try {
             recipeName.setText(recipe.getName());
             List<Step> stepList = recipe.getSteps();

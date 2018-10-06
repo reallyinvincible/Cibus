@@ -1,5 +1,6 @@
 package com.example.bakingapp.activities;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bakingapp.R;
 import com.example.bakingapp.adapters.RecipeAdapter;
+import com.example.bakingapp.models.FetchedRecipeList;
 import com.example.bakingapp.models.Recipe;
 import com.google.gson.Gson;
 
@@ -33,8 +35,10 @@ public class HomeActivity extends AppCompatActivity {
     private List<Recipe> recipeList;
 
     @BindView(R.id.rv_recipe_list)
+    private
     RecyclerView recipeRecyclerView;
     @BindView(R.id.loading_animation)
+    private
     LottieAnimationView animationView;
 
     @Override
@@ -90,6 +94,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void populateUi(){
+        SharedPreferences sharedPreferences = getSharedPreferences("RecipesFetched", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        FetchedRecipeList fetchedRecipeList = new FetchedRecipeList(recipeList);
+        String recipesString = gson.toJson(fetchedRecipeList);
+        editor.putString("RecipeList", recipesString);
+        editor.apply();
         RecipeAdapter adapter = new RecipeAdapter(recipeList);
         recipeRecyclerView.setAdapter(adapter);
     }

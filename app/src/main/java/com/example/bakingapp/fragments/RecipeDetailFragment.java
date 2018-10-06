@@ -16,11 +16,7 @@ import com.example.bakingapp.activities.DetailActivity;
 import com.example.bakingapp.interfaces.StepSelectInterface;
 import com.example.bakingapp.adapters.IngredientAdapter;
 import com.example.bakingapp.adapters.StepAdapter;
-import com.example.bakingapp.models.Ingredient;
 import com.example.bakingapp.models.Recipe;
-import com.example.bakingapp.models.Step;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,16 +24,20 @@ import butterknife.ButterKnife;
 public class RecipeDetailFragment extends Fragment {
 
     @BindView(R.id.rv_ingredients_list)
+    private
     RecyclerView ingredientsRecyclerView;
     @BindView(R.id.rv_step_details)
+    private
     RecyclerView stepRecyclerView;
     @BindView(R.id.tv_recipe_name)
+    private
     TextView recipeName;
     @BindView(R.id.toolbar)
+    private
     Toolbar toolbar;
 
-    Recipe recipe;
-    static StepSelectInterface mStepSelectInterface;
+    private Recipe recipe;
+    private static StepSelectInterface mStepSelectInterface;
 
     public RecipeDetailFragment() {
     }

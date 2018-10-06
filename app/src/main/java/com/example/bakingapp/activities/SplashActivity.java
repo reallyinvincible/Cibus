@@ -15,8 +15,10 @@ import butterknife.ButterKnife;
 public class SplashActivity extends AppCompatActivity {
 
     @BindView(R.id.splash_screen)
+    private
     View view;
     @BindView(R.id.splash_screen_animation)
+    private
     LottieAnimationView animationView;
 
     @Override

@@ -1,7 +1,6 @@
 package com.example.bakingapp;
 
 import android.support.test.espresso.intent.Intents;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -19,7 +18,6 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 
 @RunWith(AndroidJUnit4.class)
 public class SplashSkipTest {
@@ -27,7 +25,7 @@ public class SplashSkipTest {
     @Rule public ActivityTestRule<SplashActivity> activityTestRule =
             new ActivityTestRule<>(SplashActivity.class);
 
-    @Before public void setUp() throws Exception{
+    @Before public void setUp() {
         Intents.init();
     }
 
@@ -38,7 +36,7 @@ public class SplashSkipTest {
     }
 
     @After
-    public void tearDown() throws Exception{
+    public void tearDown() {
         Intents.release();
     }
 

@@ -19,7 +19,6 @@
             android:id="@+id/tv_recipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pepproni Pizza"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -65,7 +64,7 @@
         android:layout_marginBottom="4dp"
         android:drawableLeft="@drawable/ic_left"
         android:drawableTint="@color/colorAccent"
-        android:text="Previous Step"
+        android:text="@string/previous_step"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -78,7 +77,7 @@
         android:layout_marginBottom="4dp"
         android:drawableRight="@drawable/ic_right"
         android:drawableTint="@color/colorAccent"
-        android:text="Next Step"
+        android:text="@string/next_step"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

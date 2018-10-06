@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Cibus</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="next_step">Next Step</string>
+    <string name="servings">Servings</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="next_step">Next Step</string>
+    <string name="servings">Servings</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="next_step">Next Step</string>
+    <string name="recipes">Recipes</string>
+    <string name="cibus">CIBUS</string>
+    <string name="the_food_app">The Food App</string>
+    <string name="click_anywhere_to_continue">Click Anywhere to Continue…</string>
 </resources>

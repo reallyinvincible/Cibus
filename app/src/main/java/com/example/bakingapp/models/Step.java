@@ -24,7 +24,7 @@ public class Step implements Parcelable{
     @Expose
     private String thumbnailURL;
 
-    protected Step(Parcel in) {
+    private Step(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
         } else {

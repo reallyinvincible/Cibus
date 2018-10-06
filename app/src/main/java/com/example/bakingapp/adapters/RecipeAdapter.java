@@ -1,6 +1,5 @@
 package com.example.bakingapp.adapters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +14,13 @@ import com.example.bakingapp.models.Recipe;
 import com.google.gson.Gson;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
-    List<Recipe> recipes;
+    private final List<Recipe> recipes;
 
     public RecipeAdapter(List<Recipe> recipes) {
         this.recipes = recipes;
