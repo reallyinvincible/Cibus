@@ -31,14 +31,12 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private JSONArray recipes;
-    private List<Recipe> recipeList;
+    JSONArray recipes;
+    List<Recipe> recipeList;
 
     @BindView(R.id.rv_recipe_list)
-    private
     RecyclerView recipeRecyclerView;
     @BindView(R.id.loading_animation)
-    private
     LottieAnimationView animationView;
 
     @Override

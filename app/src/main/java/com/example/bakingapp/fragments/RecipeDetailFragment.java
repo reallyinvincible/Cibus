@@ -24,16 +24,12 @@ import butterknife.ButterKnife;
 public class RecipeDetailFragment extends Fragment {
 
     @BindView(R.id.rv_ingredients_list)
-    private
     RecyclerView ingredientsRecyclerView;
     @BindView(R.id.rv_step_details)
-    private
     RecyclerView stepRecyclerView;
     @BindView(R.id.tv_recipe_name)
-    private
     TextView recipeName;
     @BindView(R.id.toolbar)
-    private
     Toolbar toolbar;
 
     private Recipe recipe;
