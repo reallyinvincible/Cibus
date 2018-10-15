@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.HomeActivity" />
+
         <activity
             android:name=".activities.DetailActivity"
             android:parentActivityName=".activities.HomeActivity">
@@ -19,6 +20,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HomeActivity" />
         </activity>
+
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,16 +29,19 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".CibusAppWidget">
+        <receiver android:name=".widget.CibusAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/cibus_app_widget_info" />
         </receiver>
-        <service android:name=".GridWidgetService"
+
+        <service android:name=".widget.RecipeGridWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+        <service android:name=".widget.IngredientGridWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 

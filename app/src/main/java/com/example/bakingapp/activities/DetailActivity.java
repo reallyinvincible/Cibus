@@ -1,6 +1,9 @@
 package com.example.bakingapp.activities;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +16,7 @@ import com.example.bakingapp.interfaces.StepSelectInterface;
 import com.example.bakingapp.fragments.RecipeDetailFragment;
 import com.example.bakingapp.fragments.StepDetailFragment;
 import com.example.bakingapp.models.Recipe;
+import com.example.bakingapp.widget.CibusAppWidget;
 import com.google.gson.Gson;
 
 import butterknife.ButterKnife;
@@ -25,12 +29,14 @@ public class DetailActivity extends AppCompatActivity {
     private int mPosition = 0;
     private boolean recipeLoaded = true;
     private static boolean twoPane = false;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        sharedPreferences = getSharedPreferences("DataStorage", MODE_PRIVATE);
 
         if (savedInstanceState != null){
             mPosition = savedInstanceState.getInt("Position");
@@ -79,6 +85,7 @@ public class DetailActivity extends AppCompatActivity {
         } else if (getIntent() != null) {
             Intent intent = getIntent();
             String recipeString = intent.getStringExtra("SelectedRecipe");
+            updateWidget(recipeString);
             Gson gson = new Gson();
             recipe = gson.fromJson(recipeString, Recipe.class);
             recipeLoaded = true;
@@ -133,6 +140,18 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_step_detail_pane, stepDetailFragment).commit();
         }
+    }
+
+    void updateWidget(String recipeString){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("SelectedRecipe", recipeString);
+        editor.apply();
+        Intent intent = new Intent(this, CibusAppWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication())
+                .getAppWidgetIds(new ComponentName(getApplication(), CibusAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
     }
 
     private void setmPosition(int mPosition) {

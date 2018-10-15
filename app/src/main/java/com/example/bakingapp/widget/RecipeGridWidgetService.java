@@ -1,4 +1,4 @@
-package com.example.bakingapp;
+package com.example.bakingapp.widget;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.example.bakingapp.R;
 import com.example.bakingapp.models.FetchedRecipeList;
 import com.example.bakingapp.models.Recipe;
 import com.google.gson.Gson;
@@ -13,23 +14,23 @@ import com.google.gson.Gson;
 import java.util.List;
 
 
-public class GridWidgetService extends RemoteViewsService{
+public class RecipeGridWidgetService extends RemoteViewsService{
 
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new GridRemoteViewsFactory(this.getApplicationContext());
+        return new RecipeGridRemoteViewsFactory(this.getApplicationContext());
     }
 }
 
-class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+class RecipeGridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final Context mContext;
     private final List<Recipe> recipeList;
 
-    GridRemoteViewsFactory(Context mContext) {
+    RecipeGridRemoteViewsFactory(Context mContext) {
         this.mContext = mContext;
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("RecipesFetched", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("DataStorage", Context.MODE_PRIVATE);
         String recipesString = sharedPreferences.getString("RecipeList", null);
         Gson gson = new Gson();
         FetchedRecipeList fetchedRecipeList = gson.fromJson(recipesString, FetchedRecipeList.class);

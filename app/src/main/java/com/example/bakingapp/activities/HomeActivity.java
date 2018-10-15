@@ -1,5 +1,8 @@
 package com.example.bakingapp.activities;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import com.example.bakingapp.R;
 import com.example.bakingapp.adapters.RecipeAdapter;
 import com.example.bakingapp.models.FetchedRecipeList;
 import com.example.bakingapp.models.Recipe;
+import com.example.bakingapp.widget.CibusAppWidget;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -39,12 +43,15 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.loading_animation)
     LottieAnimationView animationView;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         recipeList = new ArrayList<Recipe>();
+        sharedPreferences = getSharedPreferences("DataStorage", MODE_PRIVATE);
         requestData();
     }
 
@@ -92,7 +99,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void populateUi(){
-        SharedPreferences sharedPreferences = getSharedPreferences("RecipesFetched", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         FetchedRecipeList fetchedRecipeList = new FetchedRecipeList(recipeList);
@@ -101,5 +107,24 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
         RecipeAdapter adapter = new RecipeAdapter(recipeList);
         recipeRecyclerView.setAdapter(adapter);
+        updateWidget();
+    }
+
+    void updateWidget(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("SelectedRecipe", null);
+        editor.apply();
+        Intent intent = new Intent(this, CibusAppWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication())
+                .getAppWidgetIds(new ComponentName(getApplication(), CibusAppWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateWidget();
     }
 }
