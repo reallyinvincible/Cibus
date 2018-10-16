@@ -17,6 +17,14 @@
         android:orientation="vertical"
         android:padding="4dp">
 
+        <ImageView
+            android:id="@+id/iv_step_thumbnail"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:scaleType="fitCenter"/>
+
         <TextView
             android:id="@+id/tv_step_number"
             android:layout_width="match_parent"

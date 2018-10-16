@@ -6,11 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.bakingapp.R;
 import com.example.bakingapp.interfaces.StepSelectInterface;
 import com.example.bakingapp.models.Step;
+import com.google.android.exoplayer2.ui.PlayerView;
 
 import java.util.List;
 
@@ -40,7 +43,10 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         Step data = stepList.get(position);
         holder.stepNumber.setText("Step " + String.valueOf(position + 1));
         holder.stepDescription.setText(data.getShortDescription());
-
+        if (!data.getThumbnailURL().equals("")) {
+            holder.stepThumbnailView.setVisibility(View.VISIBLE);
+            Glide.with(holder.stepThumbnailView.getContext()).load(data.getThumbnailURL()).into(holder.stepThumbnailView);
+        }
         holder.stepCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +60,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         return stepList.size();
     }
 
-    public class StepViewHolder extends RecyclerView.ViewHolder {
+    class StepViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_step_number)
         TextView stepNumber;
@@ -64,6 +70,9 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
 
         @BindView(R.id.cv_step_card)
         CardView stepCard;
+
+        @BindView(R.id.iv_step_thumbnail)
+        ImageView stepThumbnailView;
 
         StepViewHolder(View itemView) {
             super(itemView);

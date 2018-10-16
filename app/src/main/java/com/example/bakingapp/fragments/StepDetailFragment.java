@@ -172,16 +172,28 @@ public class StepDetailFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-        releasePlayer();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong("CurrentPosition", mExoPlayer.getContentPosition());
-        outState.putBoolean("PlayerState", mExoPlayer.getPlayWhenReady());
+        if (mExoPlayer != null) {
+            outState.putLong("CurrentPosition", mExoPlayer.getContentPosition());
+            outState.putBoolean("PlayerState", mExoPlayer.getPlayWhenReady());
+        }
     }
 
     public void setmStepNavigationInterface(StepNavigationInterface mStepNavigationInterface) {
